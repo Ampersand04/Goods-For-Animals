@@ -1,0 +1,101 @@
+[
+    {
+        "id": 1,
+        "title": "Корм сухой KARMY",
+        "description": "Корм сухой KARMY Adult Курица для взрослых кошек старше 1 года",
+        "category": "Для кошек",
+        "type": "Корм сухой",
+        "price": 25,
+        "stars": "4"
+    },
+    {
+        "id": 2,
+        "title": "Корм сухой KARMY",
+        "description": "Корм сухой KARMY Adult Курица для взрослых кошек старше 1 года",
+        "category": "Для кошек",
+        "type": "Корм сухой",
+        "price": 15,
+        "stars": "4"
+    },
+    {
+        "id": 3,
+        "title": "Корм сухой KARMY",
+        "description": "Корм сухой KARMY Adult Курица для взрослых кошек старше 1 года",
+        "category": "Для кошек",
+        "type": "Корм сухой",
+        "price": 20,
+        "stars": "4"
+    },
+    {
+        "id": 4,
+        "title": "Сухой корм для кошек Eukanuba",
+        "description": "Сухой корм для кошек Eukanuba Adult Sterilised Weight Сontrol с",
+        "category": "Для кошек",
+        "type": "Корм сухой",
+        "price": 23,
+        "stars": "4"
+    },
+    {
+        "id": 5,
+        "title": "Сухой корм для кошек Eukanuba",
+        "description": "Сухой корм для кошек Eukanuba Adult Sterilised Weight Сontrol с",
+        "category": "Для кошек",
+        "type": "Корм сухой",
+        "price": 12,
+        "stars": "4"
+    },
+    {
+        "id": 6,
+        "title": "Сухой корм для кошек Eukanuba",
+        "description": "Сухой корм для кошек Eukanuba Adult Sterilised Weight Сontrol с",
+        "category": "Для кошек",
+        "type": "Корм сухой",
+        "price": 12,
+        "stars": "5"
+    },
+    {
+        "id": 7,
+        "title": "Сухой корм для стерилизованных кошек",
+        "description": "Сухой корм для стерилизованных кошек и кастрированных котов Secret Premium с курицей и рисом, 2 кг",
+        "category": "Для кошек",
+        "type": "Корм сухой",
+        "price": 22,
+        "stars": "5"
+    },
+    {
+        "id": 8,
+        "title": "Сухой корм для стерилизованных кошек",
+        "description": "Сухой корм для стерилизованных кошек и кастрированных котов Secret Premium с курицей и рисом, 2 кг",
+        "category": "Для кошек",
+        "type": "Корм сухой",
+        "price": 42,
+        "stars": "5"
+    },
+    {
+        "id": 9,
+        "title": "Гиппоаллергенный сухой корм",
+        "description": "Гиппоаллергенный сухой корм для собак Karmy Hypoallergenic",
+        "category": "Для собак",
+        "type": "Корм сухой",
+        "price": 25,
+        "stars": "5"
+    },
+    {
+        "id": 10,
+        "title": "Гиппоаллергенный сухой корм",
+        "description": "Гиппоаллергенный сухой корм для собак Karmy Hypoallergenic",
+        "category": "Для собак",
+        "type": "Корм сухой",
+        "price": 13,
+        "stars": "5"
+    },
+    {
+        "id": 11,
+        "title": "Гиппоаллергенный сухой корм",
+        "description": "Гиппоаллергенный сухой корм для собак Karmy Hypoallergenic",
+        "category": "Для собак",
+        "type": "Корм сухой",
+        "price": 25,
+        "stars": "5"
+    }
+]

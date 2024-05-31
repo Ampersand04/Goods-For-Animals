@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
+import products from '../../products.json';
+
 import { Layout } from '../../components/Layout/Layout';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
@@ -8,7 +10,7 @@ import { useEffect } from 'react';
 
 export const Home = () => {
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.product.goods);
+    // const products;
     const status = useSelector((state) => state.product.status);
     // const basket = useSelector((state) => state.product.basket);
     const error = useSelector((state) => state.product.error);
@@ -56,17 +58,16 @@ export const Home = () => {
     // const isProductInBasket = (productId) => {
     //     return basket && basket.some((item) => item.id === productId);
     // };
-    const categorySortOptions = [
-        '5 мин.',
-        '10 мин.',
-        '15 мин.',
-        '30 мин.',
-        '45 мин.',
-        '1 час',
-        'Более 1 часа',
-    ];
+    const categorySortOptions = ['Для кошек', 'Для собак', 'Для грызунов', 'Для птиц', 'Для рыбок'];
 
-    const typeSortOptions = ['Горячее', 'Закуски', 'Десерт', 'Напиток', 'Салат', 'Суп'];
+    const typeSortOptions = [
+        'Корм сухой',
+        'Корм влажный',
+        'Лакомство',
+        'Одежда для животных',
+        'Игрушка для животных',
+        'Топпер',
+    ];
 
     return (
         <Layout title={'Товары для животных'}>
@@ -140,38 +141,38 @@ export const Home = () => {
             {console.log(products)}
 
             <div className={styles.products}>
-                {status === 'loading' && <p>Загрузка...</p>}
+                {/* {status === 'loading' && <p>Загрузка...</p>}
                 {status === 'failed' && <p>ОШИБКА: {error}</p>}
-                {status === 'succeeded' && products?.length > 0 ? (
-                    products.map((product, index) => (
-                        <div key={index} className={styles.product}>
-                            <div className={styles.image}>
-                                <img src={'cat.png'} alt="Recipe" />
-                                <p className={styles.stars}>
-                                    <img src={'star.svg'} alt="Recipe" />
-                                    {product?.stars}
-                                </p>
+                {status === 'succeeded' && products?.length > 0 ? ( */}
+                {products.map((product, index) => (
+                    <div key={index} className={styles.product}>
+                        <div className={styles.image}>
+                            <img src={'cat.png'} alt="Recipe" />
+                            <p className={styles.stars}>
+                                <img src={'star.svg'} alt="Recipe" />
+                                {product?.stars}
+                            </p>
+                        </div>
+                        <div className={styles.title}>
+                            <div className={styles.path}>
+                                <h3>{product?.title}</h3>
+                                <h3 className={styles.price}>{product?.price} BYN</h3>
                             </div>
-                            <div className={styles.title}>
-                                <div className={styles.path}>
-                                    <h3>{product?.title}</h3>
-                                    <h3 className={styles.price}>{product?.price} BYN</h3>
-                                </div>
-                            </div>
-                            <p>{product?.description}</p>
+                        </div>
+                        <p>{product?.description}</p>
 
-                            <button>Добавить в корзину</button>
+                        <button>Добавить в корзину</button>
 
-                            {/* <button
+                        {/* <button
                                 onClick={() => handleAddToBasket(product.id)}
                                 disabled={isProductInBasket(product.id)}>
                                 {isProductInBasket(product.id) ? 'Добавлено' : 'Добавить в корзину'}
                             </button> */}
-                        </div>
-                    ))
-                ) : (
+                    </div>
+                ))}
+                {/* ) : (
                     <p>Товары не найдены</p>
-                )}
+                )} */}
             </div>
         </Layout>
     );

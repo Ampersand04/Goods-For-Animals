@@ -296,6 +296,10 @@ app.post('/add-to-basket', authMiddleware, async (req, res) => {
     try {
         const userId = req.user.id; // Получаем ID пользователя из аутентификации
 
+        // Проверяем, что goodsId присутствует и не равен undefined
+        if (!goodsId) {
+            return res.status(400).json({ error: 'Не указан ID товара' });
+        }
         // Проверяем, существует ли товар с указанным ID
         const goodsExists = await prisma.goods.findUnique({
             where: { id: goodsId },

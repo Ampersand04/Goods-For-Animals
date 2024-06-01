@@ -6,7 +6,8 @@
         "category": "Для кошек",
         "type": "Корм сухой",
         "price": 25,
-        "stars": "4"
+        "stars": "4",
+        "img": "felix.webp"
     },
     {
         "id": 2,
@@ -15,7 +16,8 @@
         "category": "Для кошек",
         "type": "Корм сухой",
         "price": 15,
-        "stars": "4"
+        "stars": "4",
+        "img": "felix.webp"
     },
     {
         "id": 3,
@@ -24,7 +26,8 @@
         "category": "Для кошек",
         "type": "Корм сухой",
         "price": 20,
-        "stars": "4"
+        "stars": "4",
+        "img": "felix.webp"
     },
     {
         "id": 4,
@@ -33,7 +36,8 @@
         "category": "Для кошек",
         "type": "Корм сухой",
         "price": 23,
-        "stars": "4"
+        "stars": "4",
+        "img": "felix.webp"
     },
     {
         "id": 5,
@@ -42,7 +46,8 @@
         "category": "Для кошек",
         "type": "Корм сухой",
         "price": 12,
-        "stars": "4"
+        "stars": "4",
+        "img": "pedigree.webp"
     },
     {
         "id": 6,
@@ -51,7 +56,8 @@
         "category": "Для кошек",
         "type": "Корм сухой",
         "price": 12,
-        "stars": "5"
+        "stars": "5",
+        "img": "meet.webp"
     },
     {
         "id": 7,
@@ -60,7 +66,8 @@
         "category": "Для кошек",
         "type": "Корм сухой",
         "price": 22,
-        "stars": "5"
+        "stars": "5",
+        "img": "meet.webp"
     },
     {
         "id": 8,
@@ -69,7 +76,8 @@
         "category": "Для кошек",
         "type": "Корм сухой",
         "price": 42,
-        "stars": "5"
+        "stars": "5",
+        "img": "meet.webp"
     },
     {
         "id": 9,
@@ -78,7 +86,8 @@
         "category": "Для собак",
         "type": "Корм сухой",
         "price": 25,
-        "stars": "5"
+        "stars": "5",
+        "img": "pedigree.webp"
     },
     {
         "id": 10,
@@ -87,7 +96,8 @@
         "category": "Для собак",
         "type": "Корм сухой",
         "price": 13,
-        "stars": "5"
+        "stars": "5",
+        "img": "pedigree.webp"
     },
     {
         "id": 11,
@@ -96,6 +106,7 @@
         "category": "Для собак",
         "type": "Корм сухой",
         "price": 25,
-        "stars": "5"
+        "stars": "5",
+        "img": "pedigree.webp"
     }
 ]

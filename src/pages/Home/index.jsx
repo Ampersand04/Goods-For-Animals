@@ -13,7 +13,7 @@ export const Home = () => {
     // const products;
     const status = useSelector((state) => state.product.status);
     // const basket = useSelector((state) => state.product.basket);
-    const error = useSelector((state) => state.product.error);
+    // const error = useSelector((state) => state.product.error);
 
     // const [favoriteStatus, setFavoriteStatus] = useState({});
 
@@ -147,7 +147,7 @@ export const Home = () => {
                 {products.map((product, index) => (
                     <div key={index} className={styles.product}>
                         <div className={styles.image}>
-                            <img src={'cat.png'} alt="Recipe" />
+                            <img src={product?.img} alt="Recipe" />
                             <p className={styles.stars}>
                                 <img src={'star.svg'} alt="Recipe" />
                                 {product?.stars}

@@ -48,7 +48,7 @@ export const Basket = () => {
                               <div key={index} className={styles.product}>
                                   <div className={styles.image}>
                                       <img
-                                          src={`http://localhost:4000/uploads/${product.image}`}
+                                          src={`https://api-goods-for-animals.onrender.com/uploads/${product.image}`}
                                           alt="product"
                                       />
                                       <p className={styles.stars}>

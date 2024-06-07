@@ -1,53 +1,78 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Layout } from '../../components/Layout/Layout';
 import styles from './Basket.module.scss';
-import { fetchUser, selectIsAuth } from '../../redux/slices/auth';
+import { selectUser } from '../../redux/slices/auth';
+import { toggleBasketProduct } from '../../redux/slices/auth';
 
 export const Basket = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+    const user = useSelector(selectUser);
 
-    const isAuth = useSelector(selectIsAuth);
+    const [totalSum, setTotalSum] = useState(0);
 
-    if (!isAuth) {
-        navigate('/');
-    }
+    const usersGoodsInBaskets = user?.baskets;
+
+    const handleGoodsInBasketsToggle = (productId) => {
+        dispatch(toggleBasketProduct({ goodsId: productId }));
+    };
 
     useEffect(() => {
-        dispatch(fetchUser());
-    }, [dispatch]);
+        const calculateTotalSum = () => {
+            const sum = usersGoodsInBaskets.reduce(
+                (acc, product) => acc + Number(product.price),
+                0,
+            );
+            setTotalSum(sum);
+        };
+
+        calculateTotalSum();
+    }, [usersGoodsInBaskets]);
 
     return (
-        <Layout title={'Добавить новый рецепт'}>
-            <div className={styles.create}>
-                <h1>Корзина товаров</h1>
+        <Layout title={'Корзина товаров'}>
+            <div className={styles.basket}>
+                <h1>Корзина </h1>
+                <div className={styles.check}>
+                    <h2>Cумма</h2>
 
-                <div className={styles.зкщвгсеы}>
-                    {userRecipes?.length > 0
-                        ? userRecipes.map((recipe, index) => (
-                              <div key={index} className={styles.recipe}>
+                    <div></div>
+
+                    <h3>{totalSum}&nbsp;Byn</h3>
+                </div>
+                <div className={styles.products}>
+                    {usersGoodsInBaskets?.length > 0
+                        ? usersGoodsInBaskets.map((product, index) => (
+                              <div key={index} className={styles.product}>
                                   <div className={styles.image}>
-                                      <img src={'carrot.png'} alt="recipe" />
-                                      <p className={styles.time}>{recipe?.time}</p>
-                                      <p className={styles.type}>{recipe?.type}</p>
+                                      <img
+                                          src={`http://localhost:4000/uploads/${product.image}`}
+                                          alt="product"
+                                      />
+                                      <p className={styles.stars}>
+                                          <img src={'star.svg'} alt="product" />
+                                          {product?.stars}
+                                      </p>
                                   </div>
                                   <div className={styles.title}>
-                                      <h3>{recipe?.title}</h3>
                                       <div className={styles.path}>
-                                          <img
-                                              src={
-                                                  likedRecipes.includes(recipe.id)
-                                                      ? 'noliked.svg'
-                                                      : 'liked.svg'
-                                              }
-                                              onClick={() => handleFavoriteToggle(recipe.id)}
-                                              alt="not liked"
-                                          />
+                                          <h3>{product?.title}</h3>
+                                          <h3 className={styles.price}>{product?.price} BYN</h3>
                                       </div>
                                   </div>
-                                  <p>{recipe?.description}</p>
+                                  <p>{product?.description}</p>
+
+                                  {console.log(product.id)}
+                                  <button onClick={() => handleGoodsInBasketsToggle(product.id)}>
+                                      Удалить из корзины
+                                  </button>
+                                  {/* <button
+                                    onClick={() => handleAddToBasket(product.id)}
+                                    disabled={isProductInBasket(product.id)}>
+                                    {isProductInBasket(product.id) ? 'Добавлено' : 'Добавить в корзину'}
+                                </button> */}
                               </div>
                           ))
                         : 'Нет данных'}

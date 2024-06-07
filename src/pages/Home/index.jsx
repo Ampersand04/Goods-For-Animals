@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import products from '../../products.json';
+// import products from '../../products.json';
 
 import { Layout } from '../../components/Layout/Layout';
 import Select from 'react-select';
@@ -7,13 +7,15 @@ import { Controller, useForm } from 'react-hook-form';
 import { fetchProducts, searchProducts } from '../../redux/slices/product';
 import styles from './Home.module.scss';
 import { useEffect } from 'react';
+import { toggleBasketProduct } from '../../redux/slices/auth';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
     const dispatch = useDispatch();
-    // const products;
+    const products = useSelector((state) => state.product.goods);
     const status = useSelector((state) => state.product.status);
-    // const basket = useSelector((state) => state.product.basket);
-    // const error = useSelector((state) => state.product.error);
+    const error = useSelector((state) => state.product.error);
+    // const basket = useSelector((state) => state.auth.user?.basket);
 
     // const [favoriteStatus, setFavoriteStatus] = useState({});
 
@@ -25,8 +27,8 @@ export const Home = () => {
     } = useForm({
         defaultValues: {
             query: '',
+            categorySort: [],
             typeSort: [],
-            timeSort: [],
         },
         mode: 'onSubmit',
     });
@@ -41,23 +43,17 @@ export const Home = () => {
         console.log(formData);
         const searchPayload = {
             query: formData.query || '',
+            categorySort: formData.categorySort.map((option) => option.value),
             typeSort: formData.typeSort.map((option) => option.value),
-            timeSort: formData.timeSort.map((option) => option.value),
         };
         console.log(searchPayload);
 
         dispatch(searchProducts(searchPayload));
     };
 
-    // const handleAddToBasket = (productId) => {
-    //     if (!isProductInBasket(productId)) {
-    //         dispatch(toggleBasketProduct(productId));
-    //     }
-    // };
-
-    // const isProductInBasket = (productId) => {
-    //     return basket && basket.some((item) => item.id === productId);
-    // };
+    const handleAddToBasket = (productId) => {
+        dispatch(toggleBasketProduct({ goodsId: productId }));
+    };
     const categorySortOptions = ['Для кошек', 'Для собак', 'Для грызунов', 'Для птиц', 'Для рыбок'];
 
     const typeSortOptions = [
@@ -98,7 +94,7 @@ export const Home = () => {
                 <div className={styles.filter}>
                     <div>
                         <Controller
-                            name="timeSort"
+                            name="categorySort"
                             control={control}
                             render={({ field }) => (
                                 <Select
@@ -138,41 +134,41 @@ export const Home = () => {
                 </div>
             </form>
 
-            {console.log(products)}
-
             <div className={styles.products}>
-                {/* {status === 'loading' && <p>Загрузка...</p>}
+                {status === 'loading' && <p>Загрузка...</p>}
                 {status === 'failed' && <p>ОШИБКА: {error}</p>}
-                {status === 'succeeded' && products?.length > 0 ? ( */}
-                {products.map((product, index) => (
-                    <div key={index} className={styles.product}>
-                        <div className={styles.image}>
-                            <img src={product?.img} alt="Recipe" />
-                            <p className={styles.stars}>
-                                <img src={'star.svg'} alt="Recipe" />
-                                {product?.stars}
-                            </p>
-                        </div>
-                        <div className={styles.title}>
-                            <div className={styles.path}>
-                                <h3>{product?.title}</h3>
-                                <h3 className={styles.price}>{product?.price} BYN</h3>
+                {status === 'succeeded' && products?.length > 0 ? (
+                    products.map((product, index) => (
+                        <div key={index} className={styles.product}>
+                            <Link to={`/product/${product.id}`} className={styles.image}>
+                                <img
+                                    // src={`http://localhost:4000/uploads/${product.image}`}
+                                    src={`https://api-goods-for-animals.onrender.com/uploads/${product.image}`}
+                                    alt="product"
+                                />
+                                <p className={styles.stars}>
+                                    <img src={'star.svg'} alt="product" />
+                                    {product?.stars}
+                                </p>
+                            </Link>
+                            <div className={styles.title}>
+                                <div className={styles.path}>
+                                    <h3>{product?.title}</h3>
+                                    <h3 className={styles.price}>{product?.price} BYN</h3>
+                                </div>
                             </div>
+                            <p>{product?.description}</p>
+
+                            {/* <button>Добавить в корзину</button> */}
+
+                            <button onClick={() => handleAddToBasket(product.id)}>
+                                Добавить в корзину
+                            </button>
                         </div>
-                        <p>{product?.description}</p>
-
-                        <button>Добавить в корзину</button>
-
-                        {/* <button
-                                onClick={() => handleAddToBasket(product.id)}
-                                disabled={isProductInBasket(product.id)}>
-                                {isProductInBasket(product.id) ? 'Добавлено' : 'Добавить в корзину'}
-                            </button> */}
-                    </div>
-                ))}
-                {/* ) : (
+                    ))
+                ) : (
                     <p>Товары не найдены</p>
-                )} */}
+                )}
             </div>
         </Layout>
     );

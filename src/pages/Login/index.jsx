@@ -74,10 +74,6 @@ export const Login = () => {
                     </div>
 
                     <div className={styles.authContent}>
-                        <p>
-                            Введите email и пароль, чтобы войти в<br></br> свой аккаунт
-                        </p>
-
                         <form onSubmit={handleSubmit(onSubmit)} className={styles.Form}>
                             <label htmlFor="email">Email</label>
                             <input
@@ -94,7 +90,6 @@ export const Login = () => {
                             <p className={styles.error}>{errors.email?.message}</p>
 
                             <label htmlFor="password">Пароль</label>
-                            {/* <div> */}
                             <input
                                 type="password"
                                 id="password"
@@ -107,9 +102,6 @@ export const Login = () => {
                                 })}
                             />
                             <p className={styles.error}>{errors.password?.message}</p>
-                            {/* <span>svg</span> */}
-                            {/* </div> */}
-                            <Link to="/reset">Забыли пароль?</Link>
                             <button type="submit">Войти</button>
                             <p>
                                 Еще нет аккаунта? <Link to="/signUp">Зарегистрируйся</Link>

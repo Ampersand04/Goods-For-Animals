@@ -8,13 +8,14 @@ const initialState = {
     favoriteMessage: null,
 };
 
-export const createProduct = createAsyncThunk(
-    'products/createProduct',
-    async ({ title, description, type, time }) => {
-        const response = await axios.post('/create', { title, description, type, time });
-        return response.data;
-    },
-);
+export const createProduct = createAsyncThunk('products/createProduct', async (formData) => {
+    const response = await axios.post('/create', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+    return response.data;
+});
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
     const response = await axios.get('/get-all-goods');
@@ -22,7 +23,7 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async ()
 });
 
 export const searchProducts = createAsyncThunk(
-    'products/searchRecipes',
+    'products/searchProducts',
     async ({ query, categorySort, typeSort, priceRange }) => {
         const response = await axios.post('/get-serching-goods', {
             query,
@@ -43,14 +44,6 @@ export const deleteProduct = createAsyncThunk('products/deleteProduct', async (i
     const response = await axios.delete('/delete', { data: { id } });
     return response.data;
 });
-
-export const toggleBasketProduct = createAsyncThunk(
-    'products/toggleBasketProduct',
-    async ({ goodsId }) => {
-        const response = await axios.post('/add-to-basket', { goodsId });
-        return response.data;
-    },
-);
 
 const productsSlice = createSlice({
     name: 'products',
@@ -113,17 +106,6 @@ const productsSlice = createSlice({
                 state.goods = state.goods.filter((good) => good.id !== action.meta.arg);
             })
             .addCase(deleteProduct.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.error.message;
-            })
-            .addCase(toggleBasketProduct.pending, (state) => {
-                state.status = 'loading';
-            })
-            .addCase(toggleBasketProduct.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.favoriteMessage = action.payload.message;
-            })
-            .addCase(toggleBasketProduct.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             });

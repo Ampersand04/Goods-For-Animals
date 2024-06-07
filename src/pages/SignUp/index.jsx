@@ -66,11 +66,6 @@ export const SignUp = () => {
                     </div>
 
                     <div className={styles.authContent}>
-                        <p>
-                            Заполните указанные поля, чтобы <br></br>
-                            зарегистрировать аккаунт
-                        </p>
-
                         <form onSubmit={handleSubmit(onSubmit)} className={styles.Form}>
                             <label htmlFor="fullname">ФИО</label>
                             <input

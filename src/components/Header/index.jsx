@@ -10,31 +10,35 @@ export const Header = ({ title }) => {
 
     const isAuth = useSelector(selectIsAuth);
 
+    const user = useSelector((state) => state.auth.user);
+
     useEffect(() => {
         dispatch(fetchUser());
     }, [dispatch]);
     return (
         <header className={styles.header}>
             <Link to={'/'}>
-                <img src="logo.png" width={24} alt="" />
+                <img src="/logo.png" width={24} alt="" />
                 <h1>{title}</h1>
             </Link>
 
             <nav className={styles.nav}>
                 {isAuth ? (
                     <>
-                        <Link className={styles.navLink}>
-                            <img src="search.svg" width={24} alt="" />
+                        <Link to={'/'} className={styles.navLink}>
+                            <img src="/search.svg" width={24} alt="" />
                         </Link>
                         <Link to="/basket" className={styles.navLink}>
-                            <img src="basket.svg" width={24} alt="" />
+                            <img src="/basket.svg" width={24} alt="" />
                         </Link>
                         <Link to="/profile" className={styles.navLink}>
-                            <img src="profile.svg" width={24} alt="" />
+                            <img src="/profile.svg" width={24} alt="" />
                         </Link>
 
-                        <Link to="/dashboard" className={styles.navLink}>
-                            <img src="dashboard.svg" width={24} alt="" />
+                        <Link
+                            to={user?.role === 'ADMIN' ? '/dashboard' : '/'}
+                            className={styles.navLink}>
+                            <img src="/dashboard.svg" width={24} alt="" />
                         </Link>
                     </>
                 ) : (

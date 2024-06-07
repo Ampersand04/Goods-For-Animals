@@ -26,6 +26,14 @@ export const fetchUser = createAsyncThunk('auth/fetchUser', async () => {
     return response.data.user;
 });
 
+export const toggleBasketProduct = createAsyncThunk(
+    'auth/toggleBasketProduct',
+    async ({ goodsId }) => {
+        const response = await axios.post('/add-to-basket', { goodsId });
+        return response.data;
+    },
+);
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -69,6 +77,17 @@ const authSlice = createSlice({
                 state.user = action.payload;
             })
             .addCase(fetchUser.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(toggleBasketProduct.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(toggleBasketProduct.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.favoriteMessage = action.payload.message;
+            })
+            .addCase(toggleBasketProduct.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             });

@@ -37,8 +37,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 600px;
-    // height: fit-content;
+    width: 450px;
+    height: fit-content;
     background-color: $white;
     padding: 30px;
     border-radius: 15px;
@@ -54,9 +54,11 @@
     }
 
     .Form {
+        gap: 0px;
         padding: 10px 30px;
         display: flex;
         flex-direction: column;
+        justify-content: center;
 
         align-items: flex-start;
 
@@ -83,7 +85,7 @@
             color: rgba($content, 1);
             border: none;
 
-            min-width: 100%;
+            min-width: 280px;
             font-size: 14px;
             font-weight: 700;
             background-color: rgba($content, 0.15);
@@ -123,9 +125,10 @@
         }
 
         button {
-            color: $content;
+            color: $white;
             background-color: $cta;
             border: 0;
+            width: 100%;
             outline: none;
             padding: 15px;
             margin: 30px auto 0 auto;
@@ -137,7 +140,7 @@
 
             &:hover {
                 cursor: pointer;
-                background-color: rgba($content, 0.5);
+                background-color: rgba($cta, 0.5);
             }
         }
     }

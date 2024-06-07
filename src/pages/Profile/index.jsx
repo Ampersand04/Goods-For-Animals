@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Layout } from '../../components/Layout/Layout';
 import styles from './Profile.module.scss';
 import { fetchUser, logoutUser, selectIsAuth, selectUser } from '../../redux/slices/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProduct, fetchProducts, toggleBasketProduct } from '../../redux/slices/product';
-import { Link, useNavigate } from 'react-router-dom';
+import { fetchProducts } from '../../redux/slices/product';
+import { useNavigate } from 'react-router-dom';
 
 export const Profile = () => {
     const dispatch = useDispatch();
@@ -13,17 +13,8 @@ export const Profile = () => {
     const user = useSelector(selectUser);
     const isAuth = useSelector(selectIsAuth);
 
-    const userRecipes = user?.favorites;
-
-    const products = useSelector((state) => state.product.goods);
     const status = useSelector((state) => state.product.status);
     // const basket = useSelector((state) => state.product.basket);
-    const error = useSelector((state) => state.product.error);
-    const onClickConfirm = (id) => {
-        if (window.confirm('Вы действительно хотите это сделать?')) {
-            dispatch(deleteProduct(id));
-        }
-    };
 
     if (!isAuth) {
         navigate('/');
@@ -36,24 +27,6 @@ export const Profile = () => {
             window.localStorage.removeItem('user'); // Очищаем данные пользователя при выходе
         }
         return navigate('/');
-    };
-
-    const [likedRecipes, setLikedRecipes] = useState([]);
-
-    const handleFavoriteToggle = (recipeId) => {
-        if (likedRecipes.includes(recipeId)) {
-            setLikedRecipes(likedRecipes.filter((id) => id !== recipeId));
-        } else {
-            setLikedRecipes([...likedRecipes, recipeId]);
-        }
-        // Dispatch action to toggle favorite
-        dispatch(toggleBasketProduct({ userId: 'userId', recipeId }));
-    };
-
-    const [activeTab, setActiveTab] = useState('profile');
-
-    const handleTabClick = (tab) => {
-        setActiveTab(tab);
     };
 
     useEffect(() => {

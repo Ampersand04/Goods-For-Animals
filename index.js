@@ -13,7 +13,7 @@ const pool = new pg.Pool({
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads/'); // Укажите папку для сохранения файлов
+        cb(null, './uploads'); // Укажите папку для сохранения файлов
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname); // Используйте оригинальное имя файла
@@ -23,13 +23,14 @@ const storage = multer.diskStorage({
 const prisma = new PrismaClient();
 const app = express();
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 const port = process.env.PORT;
 const router = express.Router();
 const jwt = JsonWebToken;
 const jwtSecret = process.env.JWT_SECRET;
 app.use(express.json());
 app.use(cors());
+app.use('/uploads', express.static('uploads'));
 /* 
     ================= middleware =================
 */
@@ -190,10 +191,14 @@ app.post('/admin', async (req, res) => {
     }
 });
 
-app.post('/create', async (req, res) => {
+app.post('/create', upload.single('image'), async (req, res) => {
     const { title, description, category, type, price, stars } = req.body;
+    const imageUrl = req.file ? req.file.filename : null;
 
     try {
+        // if (!title || !description || !category || !type || !price || !stars) {
+        //     return res.status(400).json({ error: 'All fields are required' });
+        // }
         const newGood = await prisma.goods.create({
             data: {
                 title,
@@ -202,6 +207,7 @@ app.post('/create', async (req, res) => {
                 type,
                 price,
                 stars,
+                image: imageUrl, // Добавление поля для хранения имени файла изображения
             },
         });
 

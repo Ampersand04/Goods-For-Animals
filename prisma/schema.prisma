@@ -33,8 +33,9 @@ model Goods {
   description String
   category    String
   type        String
-  price       Float
+  price       String
   stars       String
+  image       String?
   addedToBasket User[]
 
   @@map("goods")
